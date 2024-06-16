@@ -1,0 +1,26 @@
+[gd_scene load_steps=5 format=3 uid="uid://djxgu7fb6uli2"]
+
+[ext_resource type="Script" path="res://scripts/ball.gd" id="1_3iyou"]
+[ext_resource type="Texture2D" uid="uid://ooigfgvmmflf" path="res://assets/circle.svg" id="1_50vxp"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_ou8oi"]
+friction = 0.5
+bounce = 0.25
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_tubqy"]
+radius = 31.0
+
+[node name="Ball" type="Node2D"]
+
+[node name="RigidBody2D" type="RigidBody2D" parent="."]
+physics_material_override = SubResource("PhysicsMaterial_ou8oi")
+lock_rotation = true
+continuous_cd = 1
+script = ExtResource("1_3iyou")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RigidBody2D"]
+shape = SubResource("CircleShape2D_tubqy")
+
+[node name="Sprite2D" type="Sprite2D" parent="RigidBody2D"]
+scale = Vector2(0.119637, 0.119637)
+texture = ExtResource("1_50vxp")

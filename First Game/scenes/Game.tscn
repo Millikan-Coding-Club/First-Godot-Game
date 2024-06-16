@@ -1,0 +1,36 @@
+[gd_scene load_steps=3 format=3 uid="uid://bxocdtbnmhk1o"]
+
+[ext_resource type="PackedScene" uid="uid://djxgu7fb6uli2" path="res://scenes/ball.tscn" id="2_2bo8s"]
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_4snrn"]
+
+[node name="Game" type="Node2D"]
+
+[node name="Ball" parent="." instance=ExtResource("2_2bo8s")]
+position = Vector2(960, 540)
+
+[node name="Camera2D" type="Camera2D" parent="Ball"]
+
+[node name="Boundaries" type="Node" parent="."]
+
+[node name="Floor" type="StaticBody2D" parent="Boundaries"]
+position = Vector2(960, 1080)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Boundaries/Floor"]
+shape = SubResource("WorldBoundaryShape2D_4snrn")
+
+[node name="LeftWall" type="StaticBody2D" parent="Boundaries"]
+position = Vector2(0, 540)
+rotation = 1.5708
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Boundaries/LeftWall"]
+position = Vector2(4.80825e-07, 0)
+shape = SubResource("WorldBoundaryShape2D_4snrn")
+
+[node name="RightWall" type="StaticBody2D" parent="Boundaries"]
+position = Vector2(1920, 540)
+rotation = -1.5708
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Boundaries/RightWall"]
+position = Vector2(-4.80825e-07, 0)
+shape = SubResource("WorldBoundaryShape2D_4snrn")
