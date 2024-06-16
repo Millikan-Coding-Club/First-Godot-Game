@@ -1,36 +1,27 @@
-[gd_scene load_steps=3 format=3 uid="uid://bxocdtbnmhk1o"]
+[gd_scene load_steps=3 format=3 uid="uid://dug0vqet4cc7d"]
 
-[ext_resource type="PackedScene" uid="uid://djxgu7fb6uli2" path="res://scenes/ball.tscn" id="2_2bo8s"]
+[ext_resource type="PackedScene" uid="uid://djxgu7fb6uli2" path="res://scenes/Ball.tscn" id="1_e37m4"]
+[ext_resource type="PackedScene" uid="uid://capg5r2p0sux5" path="res://scenes/Background.tscn" id="2_0hu3q"]
 
-[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_4snrn"]
+[node name="Game" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 
-[node name="Game" type="Node2D"]
+[node name="SubViewportContainer" type="SubViewportContainer" parent="."]
+layout_mode = 1
+offset_right = 800.0
+offset_bottom = 1000.0
 
-[node name="Ball" parent="." instance=ExtResource("2_2bo8s")]
-position = Vector2(960, 540)
+[node name="SubViewport" type="SubViewport" parent="SubViewportContainer"]
+handle_input_locally = false
+size = Vector2i(800, 1000)
+render_target_update_mode = 4
 
-[node name="Camera2D" type="Camera2D" parent="Ball"]
+[node name="ParallaxBackground" parent="SubViewportContainer/SubViewport" instance=ExtResource("2_0hu3q")]
 
-[node name="Boundaries" type="Node" parent="."]
-
-[node name="Floor" type="StaticBody2D" parent="Boundaries"]
-position = Vector2(960, 1080)
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Boundaries/Floor"]
-shape = SubResource("WorldBoundaryShape2D_4snrn")
-
-[node name="LeftWall" type="StaticBody2D" parent="Boundaries"]
-position = Vector2(0, 540)
-rotation = 1.5708
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Boundaries/LeftWall"]
-position = Vector2(4.80825e-07, 0)
-shape = SubResource("WorldBoundaryShape2D_4snrn")
-
-[node name="RightWall" type="StaticBody2D" parent="Boundaries"]
-position = Vector2(1920, 540)
-rotation = -1.5708
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Boundaries/RightWall"]
-position = Vector2(-4.80825e-07, 0)
-shape = SubResource("WorldBoundaryShape2D_4snrn")
+[node name="Ball" parent="SubViewportContainer/SubViewport" instance=ExtResource("1_e37m4")]
+position = Vector2(400, 800)
