@@ -1,36 +1,43 @@
-[gd_scene load_steps=6 format=3 uid="uid://djxgu7fb6uli2"]
+[gd_scene load_steps=7 format=3 uid="uid://djxgu7fb6uli2"]
 
 [ext_resource type="Script" path="res://scripts/Ball.gd" id="1_3iyou"]
 [ext_resource type="Texture2D" uid="uid://ooigfgvmmflf" path="res://assets/circle.svg" id="1_50vxp"]
-[ext_resource type="Script" path="res://scripts/Camera.gd" id="3_4lns6"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_ou8oi"]
 friction = 0.5
 bounce = 0.25
 
+[sub_resource type="Gradient" id="Gradient_tk33i"]
+colors = PackedColorArray(1, 0, 0, 1, 1, 1, 0, 1)
+
+[sub_resource type="Curve" id="Curve_pfspb"]
+min_value = 1.0
+max_value = 2.5
+_data = [Vector2(0, 2.5), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 2
+
 [sub_resource type="CircleShape2D" id="CircleShape2D_tubqy"]
 radius = 31.0
 
-[node name="Ball" type="Node2D"]
-
-[node name="RigidBody2D" type="RigidBody2D" parent="."]
+[node name="RigidBody2D" type="RigidBody2D"]
+position = Vector2(960, 540)
 physics_material_override = SubResource("PhysicsMaterial_ou8oi")
 lock_rotation = true
 continuous_cd = 1
 script = ExtResource("1_3iyou")
+gradient = SubResource("Gradient_tk33i")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="RigidBody2D"]
+[node name="Line2D" type="Line2D" parent="."]
+z_index = -1
+width_curve = SubResource("Curve_pfspb")
+end_cap_mode = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_tubqy")
 
-[node name="Sprite2D" type="Sprite2D" parent="RigidBody2D"]
+[node name="Sprite2D" type="Sprite2D" parent="."]
 scale = Vector2(0.119637, 0.119637)
 texture = ExtResource("1_50vxp")
 
-[node name="Camera2D" type="Camera2D" parent="."]
-offset = Vector2(0, -100)
-drag_vertical_offset = -1.0
-drag_top_margin = 0.0
-script = ExtResource("3_4lns6")
-
-[connection signal="hidden" from="RigidBody2D/Sprite2D" to="RigidBody2D" method="_on_sprite_2d_hidden"]
-[connection signal="visibility_changed" from="RigidBody2D/Sprite2D" to="RigidBody2D" method="_on_sprite_2d_visibility_changed"]
+[connection signal="hidden" from="Sprite2D" to="." method="_on_sprite_2d_hidden"]
+[connection signal="visibility_changed" from="Sprite2D" to="." method="_on_sprite_2d_visibility_changed"]
