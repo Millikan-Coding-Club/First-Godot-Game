@@ -29,15 +29,14 @@ func _process(delta):
 	# Spawn obstacles
 	if ball.position.y <= height + spawn_dist:
 		var obstacle = obstacle_scn.duplicate()
+		obstacle.position = Vector2(0, height)
 		$"../SubViewportContainer/SubViewport".add_child(obstacle)
 		var animator = obstacle.find_child("AnimationPlayer")
 		animator.seek(randf() * 4)
-		obstacle.position = Vector2(0, height)
 		height -= randf_range(obstacle_min_dist, obstacle_max_dist)
 
 
 func _game_over():
-	#game_over = true
-	#$"../GameOverLabel".visible = true
-	get_tree().reload_current_scene()
-	
+	game_over = true
+	$"../GameOverLabel".visible = true
+	#get_tree().reload_current_scene()
