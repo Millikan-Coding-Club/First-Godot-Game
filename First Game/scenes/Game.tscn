@@ -1,39 +1,73 @@
-[gd_scene load_steps=6 format=3 uid="uid://dug0vqet4cc7d"]
+[gd_scene load_steps=7 format=3 uid="uid://dug0vqet4cc7d"]
 
 [ext_resource type="PackedScene" uid="uid://djxgu7fb6uli2" path="res://scenes/Ball.tscn" id="1_e37m4"]
 [ext_resource type="Script" path="res://scripts/GameManager.gd" id="1_eiegp"]
 [ext_resource type="PackedScene" uid="uid://capg5r2p0sux5" path="res://scenes/Background.tscn" id="2_0hu3q"]
 [ext_resource type="Script" path="res://scripts/Camera.gd" id="4_k3y3g"]
 
-[sub_resource type="LabelSettings" id="LabelSettings_46t3w"]
-font_size = 30
+[sub_resource type="LabelSettings" id="LabelSettings_mhrfy"]
+font_size = 40
 
-[node name="SubViewportContainer" type="SubViewportContainer"]
-offset_left = -400.0
-offset_right = 400.0
-offset_bottom = 1000.0
+[sub_resource type="LabelSettings" id="LabelSettings_fdca4"]
+font_size = 75
+shadow_size = 5
+shadow_color = Color(0, 0, 0, 1)
+
+[node name="Control" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
 
 [node name="Game Manager" type="Node" parent="."]
 process_mode = 3
 script = ExtResource("1_eiegp")
 
-[node name="SubViewport" type="SubViewport" parent="."]
+[node name="SubViewportContainer" type="SubViewportContainer" parent="."]
+layout_mode = 0
+offset_left = -400.0
+offset_right = 400.0
+offset_bottom = 1000.0
+
+[node name="SubViewport" type="SubViewport" parent="SubViewportContainer"]
 handle_input_locally = false
 size = Vector2i(800, 1000)
 render_target_update_mode = 4
 
-[node name="ParallaxBackground" parent="SubViewport" instance=ExtResource("2_0hu3q")]
+[node name="ParallaxBackground" parent="SubViewportContainer/SubViewport" instance=ExtResource("2_0hu3q")]
 
-[node name="Ball" parent="SubViewport" instance=ExtResource("1_e37m4")]
+[node name="Ball" parent="SubViewportContainer/SubViewport" instance=ExtResource("1_e37m4")]
 position = Vector2(0, 0)
 
-[node name="Camera2D" type="Camera2D" parent="SubViewport"]
+[node name="Camera2D" type="Camera2D" parent="SubViewportContainer/SubViewport"]
 offset = Vector2(0, -250)
 script = ExtResource("4_k3y3g")
 
 [node name="ScoreLabel" type="Label" parent="."]
-layout_mode = 2
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -120.0
+offset_right = 80.0
+offset_bottom = 55.0
+grow_horizontal = 2
 text = "0"
-label_settings = SubResource("LabelSettings_46t3w")
+label_settings = SubResource("LabelSettings_mhrfy")
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="GameOverLabel" type="Label" parent="."]
+visible = false
+layout_mode = 2
+offset_left = -213.5
+offset_top = 289.0
+offset_right = 213.5
+offset_bottom = 392.0
+text = "Game Over!"
+label_settings = SubResource("LabelSettings_fdca4")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[connection signal="game_over" from="SubViewportContainer/SubViewport/Camera2D" to="Game Manager" method="_game_over"]
+[connection signal="game_over" from="SubViewportContainer/SubViewport/Camera2D" to="SubViewportContainer/SubViewport/Ball" method="_game_over"]

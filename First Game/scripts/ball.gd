@@ -1,6 +1,6 @@
 extends RigidBody2D
 
-
+@onready var game_manager = $"../../../Game Manager"
 @export var force = 5
 @export var max_line_length = 300
 const wrap_limit = 430
@@ -10,7 +10,7 @@ const wrap_limit = 430
 var line_vector := Vector2()
 
 func _process(delta):
-	if Input.is_action_pressed("click"):
+	if Input.is_action_pressed("click") and not game_manager.game_over:
 		# Update line based on mouse position
 		line_vector = (get_global_mouse_position() - global_position).normalized() \
 				* minf((get_global_mouse_position() - global_position).length(), max_line_length)
