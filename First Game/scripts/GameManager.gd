@@ -40,3 +40,5 @@ func _game_over():
 	game_over = true
 	$"../GameOverLabel".visible = true
 	#get_tree().reload_current_scene()
+	
+

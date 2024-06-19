@@ -1,9 +1,21 @@
-[gd_scene load_steps=6 format=3 uid="uid://iokwyd02wsqu"]
+[gd_scene load_steps=8 format=3 uid="uid://iokwyd02wsqu"]
 
-[ext_resource type="Texture2D" uid="uid://ltdjoswmf1cf" path="res://assets/icon.svg" id="1_tfusg"]
+[ext_resource type="Texture2D" uid="uid://bejmukvmm6ui3" path="res://assets/spikeball.png" id="1_mbgxk"]
+[ext_resource type="Script" path="res://scripts/Rotation.gd" id="2_bxieq"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_bsak3"]
-size = Vector2(128, 128)
+[sub_resource type="GDScript" id="GDScript_y3yor"]
+script/source = "extends AnimatableBody2D
+
+
+
+
+
+func _on_area_2d_body_entered(body):
+	body.spike_is_hit()
+"
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_uh1qb"]
+radius = 81.0555
 
 [sub_resource type="Animation" id="Animation_m0ev5"]
 length = 0.001
@@ -46,12 +58,15 @@ _data = {
 [node name="Node2D" type="Node2D"]
 
 [node name="Obstacle" type="AnimatableBody2D" parent="."]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Obstacle"]
-shape = SubResource("RectangleShape2D_bsak3")
+script = SubResource("GDScript_y3yor")
 
 [node name="Sprite2D" type="Sprite2D" parent="Obstacle"]
-texture = ExtResource("1_tfusg")
+scale = Vector2(0.208113, 0.208113)
+texture = ExtResource("1_mbgxk")
+script = ExtResource("2_bxieq")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Obstacle"]
+shape = SubResource("CircleShape2D_uh1qb")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Obstacle"]
 libraries = {

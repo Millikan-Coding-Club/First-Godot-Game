@@ -9,6 +9,8 @@ const wrap_limit = 430
 @export var gradient : Gradient
 var line_vector := Vector2()
 
+signal spike_hit
+
 func _process(delta):
 	if Input.is_action_pressed("click") and not game_manager.game_over:
 		# Update line based on mouse position
@@ -36,3 +38,6 @@ func _integrate_forces(state):
 	if transform.x > wrap_limit:
 		transform.x = wrap_limit * -1
 	state.transform.origin = transform
+	
+	
+	

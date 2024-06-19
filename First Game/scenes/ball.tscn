@@ -32,9 +32,12 @@ z_index = -1
 width_curve = SubResource("Curve_pfspb")
 end_cap_mode = 2
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource("CircleShape2D_tubqy")
-
 [node name="Sprite2D" type="Sprite2D" parent="."]
 scale = Vector2(0.119637, 0.119637)
 texture = ExtResource("1_50vxp")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_tubqy")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="body_shape_entered" from="." to="." method="_on_body_shape_entered"]

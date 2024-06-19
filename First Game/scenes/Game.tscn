@@ -1,9 +1,13 @@
-[gd_scene load_steps=7 format=3 uid="uid://dug0vqet4cc7d"]
+[gd_scene load_steps=8 format=3 uid="uid://dug0vqet4cc7d"]
 
 [ext_resource type="PackedScene" uid="uid://djxgu7fb6uli2" path="res://scenes/Ball.tscn" id="1_e37m4"]
 [ext_resource type="Script" path="res://scripts/GameManager.gd" id="1_eiegp"]
 [ext_resource type="PackedScene" uid="uid://capg5r2p0sux5" path="res://scenes/Background.tscn" id="2_0hu3q"]
 [ext_resource type="Script" path="res://scripts/Camera.gd" id="4_k3y3g"]
+
+[sub_resource type="FontVariation" id="FontVariation_o3y4w"]
+variation_transform = Transform2D(4, 0, 0, 4, 0, 0)
+spacing_glyph = 70
 
 [sub_resource type="LabelSettings" id="LabelSettings_mhrfy"]
 font_size = 40
@@ -48,10 +52,12 @@ layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
-offset_left = -120.0
-offset_right = 80.0
-offset_bottom = 55.0
+offset_left = -238.0
+offset_top = 90.0
+offset_right = 184.0
+offset_bottom = 403.0
 grow_horizontal = 2
+theme_override_fonts/font = SubResource("FontVariation_o3y4w")
 text = "0"
 label_settings = SubResource("LabelSettings_mhrfy")
 horizontal_alignment = 1
